@@ -13,9 +13,10 @@ const SignIn = () => {
   useEffect(()=>{
    document.title = ' Sign In - Notedly'; 
   })
-  
+
   const navigation = useNavigate();
   const client = useApolloClient();
+  
   const [signIn, {loading, error}] = useMutation(SIGNIN_USER, {
     onCompleted: data => {
       localStorage.setItem('token', data.signIn);

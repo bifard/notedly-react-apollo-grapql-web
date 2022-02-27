@@ -6,11 +6,7 @@ import { useQuery, gql } from "@apollo/client";
 import { Link, useNavigate } from "react-router-dom";
 import ButtonAsLink from "./ButtonAsLink";
 
-const IS_LOGGED_IN = gql`
-  {
-    isLoggedIn @client
-  }
-`;
+
 const UserState = styled.div`
   margin-left: auto;
 `;
@@ -31,6 +27,13 @@ const LogoText = styled.h1`
   padding: 0;
   display: inline;
 `;
+
+
+const IS_LOGGED_IN = gql`
+  {
+    isLoggedIn @client
+  }
+`;
 const Header = () => {
   const navigation = useNavigate();
   const { data, client } = useQuery(IS_LOGGED_IN);
@@ -42,18 +45,18 @@ const Header = () => {
         {
           data.isLoggedIn ? (
             <ButtonAsLink
-            onClick={()=> {
-              localStorage.removeItem('token');
-              client.resetStore()                  
-              client.writeQuery({
-                query: gql`
-                  query isLoggedIn{
-                    isLoggedIn
+              onClick={()=> {
+                localStorage.removeItem('token');
+                client.resetStore()                  
+                client.writeQuery({
+                  query: gql`
+                    query isLoggedIn{
+                      isLoggedIn
+                    }
+                  `,
+                  data: {
+                    isLoggedIn: false
                   }
-                `,
-                data: {
-                  isLoggedIn: false
-                }
               });
              
               navigation("./");
