@@ -1,27 +1,11 @@
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 import NoteForm from "../components/NoteForm";
+import { NEW_NOTE } from "../gql/mutation";
 import { GET_MY_NOTES, GET_NOTES } from "../gql/query";
 
-const NEW_NOTE = gql`
-  mutation newNote($content: String!) {
-    newNote(content: $content){
-      id
-      content
-      createdAt
-      favoriteCount
-      favoritedBy {
-        id
-        username
-      }
-      author {
-        username 
-        id
-      }
-    }
-  }
-`;
+
 
 const NewNote = () => {
   const navigation = useNavigate();

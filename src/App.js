@@ -1,7 +1,8 @@
 import GlobalStyle from "./components/GlobalStyle";
 import Pages from "./pages";
-import {ApolloClient, ApolloProvider, createHttpLink, InMemoryCache, gql} from '@apollo/client';
+import {ApolloClient, ApolloProvider, createHttpLink, InMemoryCache, gql } from '@apollo/client';
 import { setContext } from 'apollo-link-context'
+
 
 
 const uri = process.env.REACT_APP_API_URI;
@@ -25,20 +26,11 @@ const client = new ApolloClient({
   connectToDevTools: true
 });
 
+
 const data = {
   isLoggedIn: !!localStorage.getItem('token')
 }
 
-cache.writeQuery({
-  query: gql`
-    query isLoggedIn{
-      isLoggedIn
-    }
-  `,
-  data: {
-    ...data
-  }
-});
 client.onResetStore(()=> {
   cache.writeQuery({
     query: gql`
@@ -52,7 +44,19 @@ client.onResetStore(()=> {
   });
 })
 
+cache.writeQuery({
+  query: gql`
+    query isLoggedIn{
+      isLoggedIn
+    }
+  `,
+  data: {
+    ...data
+  }
+});
+
 const App = () => {
+
   return (
     <ApolloProvider client={client}>
       <GlobalStyle/>

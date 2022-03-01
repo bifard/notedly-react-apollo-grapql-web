@@ -1,12 +1,8 @@
 import React from "react";
-import { gql, useApolloClient } from "@apollo/client";
+import { useApolloClient } from "@apollo/client";
 import { Navigate } from "react-router";
+import { IS_LOGGED_IN } from "../gql/query";
 
-const IS_LOGGED_IN = gql`
-  query  {
-    isLoggedIn
-  }
-`;
 
 
 const PrivateRoute = ({children}) => {

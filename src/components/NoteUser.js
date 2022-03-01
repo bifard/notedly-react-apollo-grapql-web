@@ -7,10 +7,10 @@ import FavoriteNote from "./FavoriteNote";
 
 const NoteUser = ({note}) => {
   const {loading, error, data} = useQuery(GET_ME);
-
+  console.log(data)
   if(loading) return `Loading...`;
   if(error) return `Error! ${error.message}`;
-
+  console.log(note.id)
   return (
     <> 
       <FavoriteNote

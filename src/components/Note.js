@@ -2,7 +2,7 @@ import React from "react";
 import ReactMarkdown from "react-markdown";
 import { format, parseISO } from "date-fns";
 import styled from "styled-components";
-import { useQuery } from "@apollo/client";
+import { useApolloClient } from "@apollo/client";
 import { IS_LOGGED_IN } from "../gql/query";
 import NoteUser from "./NoteUser";
 
@@ -25,10 +25,8 @@ const UserActions = styled.div`
   margin-left: auto;
 `;
 const Note = ({ note }) => {
-  const {loading, error, data:isLogeedIn} = useQuery(IS_LOGGED_IN);
-
-  if(loading) return `Loading...`;
-  if(error) return `Error! ${error.message}`;
+  const client = useApolloClient()
+  const {isLogeedIn} = client.readQuery({query: IS_LOGGED_IN});
   return (
    <StyledNote>
      <MetaData>

@@ -20,7 +20,7 @@ const EditNote = () => {
       navigation(`/note/${id}`)
     }
   })
-  console.log(useQuery(GET_ME))
+ 
   if(loading || loadingUser) return `Loading...`
   if(error || errorUser) return <p>Error! Note not found</p>
   if(userdata.me.id !== data.note.author.id){
