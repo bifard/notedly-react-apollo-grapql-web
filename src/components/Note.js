@@ -26,7 +26,7 @@ const UserActions = styled.div`
 `;
 const Note = ({ note }) => {
   const {loading, error, data:isLogeedIn} = useQuery(IS_LOGGED_IN);
-  console.log('data',isLogeedIn)
+
   if(loading) return `Loading...`;
   if(error) return `Error! ${error.message}`;
   return (

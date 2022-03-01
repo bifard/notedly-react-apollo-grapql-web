@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { GET_ME } from "../gql/query";
 import DeleteNote from "./DeleteNote";
+import FavoriteNote from "./FavoriteNote";
 
 const NoteUser = ({note}) => {
   const {loading, error, data} = useQuery(GET_ME);
@@ -12,7 +13,11 @@ const NoteUser = ({note}) => {
 
   return (
     <> 
-      Favorites : {note.favoriteCount}
+      <FavoriteNote
+        me = {data.me}
+        noteId = {note.id}
+        favoriteCount = {note.favoriteCount}
+      />
       <br/>  
       {data.me.id === note.author.id && (
           <>
