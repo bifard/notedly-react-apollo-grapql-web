@@ -38,8 +38,8 @@ const GET_NOTES = gql`
 `;
 
 const IS_LOGGED_IN = gql`
-  query  {
-    isLoggedIn
+  query isLoggedIn {
+    isLoggedIn @client
   }
 `;
 

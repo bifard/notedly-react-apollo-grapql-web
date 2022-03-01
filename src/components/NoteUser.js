@@ -1,16 +1,15 @@
-import { useQuery } from "@apollo/client";
+import { ApolloClient, useApolloClient, useQuery } from "@apollo/client";
 import React from "react";
 import { Link } from "react-router-dom";
-import { GET_ME } from "../gql/query";
+import { GET_ME, IS_LOGGED_IN } from "../gql/query";
 import DeleteNote from "./DeleteNote";
 import FavoriteNote from "./FavoriteNote";
 
 const NoteUser = ({note}) => {
   const {loading, error, data} = useQuery(GET_ME);
-  console.log(data)
   if(loading) return `Loading...`;
-  if(error) return `Error! ${error.message}`;
-  console.log(note.id)
+  if(error) return console.log(error);
+
   return (
     <> 
       <FavoriteNote

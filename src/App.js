@@ -1,7 +1,8 @@
 import GlobalStyle from "./components/GlobalStyle";
 import Pages from "./pages";
-import {ApolloClient, ApolloProvider, createHttpLink, InMemoryCache, gql } from '@apollo/client';
+import {ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from 'apollo-link-context'
+import { IS_LOGGED_IN } from "./gql/query";
 
 
 
@@ -33,11 +34,7 @@ const data = {
 
 client.onResetStore(()=> {
   cache.writeQuery({
-    query: gql`
-      query isLoggedIn{
-        isLoggedIn
-      }
-    `,
+    query: IS_LOGGED_IN,
     data: {
       ...data
     }
@@ -45,11 +42,7 @@ client.onResetStore(()=> {
 })
 
 cache.writeQuery({
-  query: gql`
-    query isLoggedIn{
-      isLoggedIn
-    }
-  `,
+  query: IS_LOGGED_IN,
   data: {
     ...data
   }
