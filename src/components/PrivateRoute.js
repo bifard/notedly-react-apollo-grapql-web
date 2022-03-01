@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { gql, InMemoryCache, useApolloClient, useQuery } from "@apollo/client";
-import { Navigate, Route, useNavigate } from "react-router";
+import React from "react";
+import { gql, useApolloClient } from "@apollo/client";
+import { Navigate } from "react-router";
 
 const IS_LOGGED_IN = gql`
   query  {

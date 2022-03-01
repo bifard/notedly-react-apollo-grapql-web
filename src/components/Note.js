@@ -1,7 +1,10 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
-import { format, parse, parseISO } from "date-fns";
+import { format, parseISO } from "date-fns";
 import styled from "styled-components";
+import { useQuery } from "@apollo/client";
+import { IS_LOGGED_IN } from "../gql/query";
+import NoteUser from "./NoteUser";
 
 const StyledNote = styled.article`
   max-width: 800px;
@@ -22,6 +25,10 @@ const UserActions = styled.div`
   margin-left: auto;
 `;
 const Note = ({ note }) => {
+  const {loading, error, data:isLogeedIn} = useQuery(IS_LOGGED_IN);
+  console.log('data',isLogeedIn)
+  if(loading) return `Loading...`;
+  if(error) return `Error! ${error.message}`;
   return (
    <StyledNote>
      <MetaData>
@@ -36,9 +43,15 @@ const Note = ({ note }) => {
          <em>by</em> {note.author.username} <br />
          {format(parseISO(note.createdAt), 'MMM do YYY')}
        </MetaInfo>
-       <UserActions>
-         <em>Favorites:</em> {note.favoriteCount}
-       </UserActions>
+       {isLogeedIn ? (
+          <UserActions>
+              <NoteUser note = {note}/>
+          </UserActions>
+        ) : (
+          <UserActions>
+            <em>Favorites:</em> {note.favoriteCount}
+          </UserActions>
+         )}
      </MetaData>
      <ReactMarkdown children={note.content}/>
    </StyledNote>

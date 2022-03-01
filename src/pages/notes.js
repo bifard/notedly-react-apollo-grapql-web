@@ -1,24 +1,10 @@
 import React from 'react';
-import {useQuery, gql} from '@apollo/client'
+import {useQuery} from '@apollo/client'
 import { useParams } from 'react-router-dom';
 
 import Note from '../components/Note';
+import { GET_NOTE } from '../gql/query';
 
-const GET_NOTE = gql`
-  query note($id: ID!) {
-    note(id: $id){
-      id
-      createdAt
-      content
-      favoriteCount
-      author {
-        username
-        id
-        avatar
-      }
-    }
-  }
-`;
 
 const NotePage = () => {
   const {id} = useParams();

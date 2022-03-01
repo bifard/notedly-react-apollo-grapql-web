@@ -1,8 +1,8 @@
 import { useMutation, gql, useApolloClient } from "@apollo/client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "../components/Button";
 import UserForm from "../components/UserForm";
+import { IS_LOGGED_IN } from "../gql/query";
 
 
 const SIGNUP_USER = gql`
@@ -27,11 +27,7 @@ const SignUp = () => {
     onCompleted: data => {
       localStorage.setItem('token', data.signUp);
       client.writeQuery({
-        query: gql`
-          query isLoggedIn{
-            isLoggedIn
-          }
-        `,
+        query: IS_LOGGED_IN,
         data: {
           isLoggedIn: true
         }
@@ -43,6 +39,8 @@ const SignUp = () => {
   return (
     <>
       <UserForm action={signUp} formType='signup'/>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error signing in</p>}
     </>
   );
 }

@@ -49,11 +49,7 @@ const Header = () => {
                 localStorage.removeItem('token');
                 client.resetStore()                  
                 client.writeQuery({
-                  query: gql`
-                    query isLoggedIn{
-                      isLoggedIn
-                    }
-                  `,
+                  query: IS_LOGGED_IN,
                   data: {
                     isLoggedIn: false
                   }
